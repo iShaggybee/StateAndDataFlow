@@ -20,9 +20,11 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .offset(x: 0, y: 100)
             Spacer()
-            ButtonView(timer: timer)
+            ButtonView(buttonTitle: timer.buttonTitle, buttonColor: Color.red, action: timer.startTimer)
             Spacer()
+            ButtonView(buttonTitle: "LogOut", buttonColor: Color.blue, action: user.logout)
         }
+        .padding(.bottom, 48)
     }
 }
 
@@ -33,17 +35,20 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct ButtonView: View {
-    @ObservedObject var timer: TimeCounter
+    var buttonTitle: String
+    var buttonColor: Color
+    
+    var action: () -> Void
     
     var body: some View {
-        Button(action: timer.startTimer) {
-            Text("\(timer.buttonTitle)")
+        Button(action: action) {
+            Text("\(buttonTitle)")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
         }
         .frame(width: 200, height: 60)
-        .background(Color.red)
+        .background(buttonColor)
         .cornerRadius(20)
         .overlay(
             RoundedRectangle(cornerRadius: 20)

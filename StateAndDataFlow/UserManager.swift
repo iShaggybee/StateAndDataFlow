@@ -9,6 +9,26 @@ import Foundation
 import Combine
 
 class UserManager: ObservableObject {
-    @Published var isRegister = false
-    var name = ""
+    let storageManager = StorageManager.shared
+    
+    @Published var isRegister = false {
+        willSet {
+            storageManager.isRegister = newValue
+        }
+    }
+    var name = "" {
+        willSet {
+            storageManager.userName = newValue
+        }
+    }
+    
+    init() {
+        isRegister = storageManager.isRegister
+        name = storageManager.userName
+    }
+    
+    func logout() {
+        isRegister.toggle()
+        name = ""
+    }
 }
