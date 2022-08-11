@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-class StorageManager {
-    static let shared = StorageManager()
-    
+class StorageManager: ObservableObject {
     @AppStorage("userName") var userName = ""
     @AppStorage("isRegister") var isRegister = false
     
-    private init() { }
+    func logout() {
+        isRegister.toggle()
+        userName = ""
+    }
 }

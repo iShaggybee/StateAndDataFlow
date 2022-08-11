@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @EnvironmentObject var user: UserManager
+    @EnvironmentObject var storageManager: StorageManager
     @State private var name = ""
     @State private var isNameValid = false
     
@@ -39,8 +39,8 @@ struct RegisterView: View {
 extension RegisterView {
     private func registerUser() {
         if isNameValid {
-            user.name = name
-            user.isRegister.toggle()
+            storageManager.userName = name
+            storageManager.isRegister.toggle()
         }
     }
 }
